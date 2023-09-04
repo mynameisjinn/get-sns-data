@@ -1,0 +1,16 @@
+server:
+    port: 443
+    ssl:
+        enabled: true
+        key-store: src/main/resources/bootsecurity.p12
+        key-store-password: 1q2w3e
+        key-store-type: PKCS12
+        key-alias: bootsecurity
+
+spring:
+    mvc:
+        hiddenmethod:
+            filter:
+                enabled: true
+        static-path-pattern: /static/**
+

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instagram</title>
+    <script  src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+</head>
+<body>
+<div id="dv"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '{appId}',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v17.0'
+    });
+
+    FB.api(
+            "https://graph.facebook.com/v17.0/{appId}/media?fields=id%2Cmedia_type%2Cmedia_url%2Cpermalink%2Cusername%2Ccaption%2Ctimestamp&access_token={access_token}",
+    		'GET',
+    		{"fields":"id,media_type,media_url,permalink,username,caption,timestamp"},
+    		function(response) {
+    			console.log(response)
+    			  var data = response.data
+    		      var html = ""
+    		      for(var i=0; i<data.length; i++){
+    		    	  console.log(data[i])
+
+    		    		html += '<p id="username'+ i +'">' +'사용자 아이디 : '+ data[i].username + '</p>';
+    		    		html += '<p id="caption' + i +'">' +'게시글 내용 : ' + data[i].caption + '</p>'
+    		    		html += '<img id="image' + i + '" src="' + data[i].media_url + '" width="300" height="300">'
+    		    		html += '<p id="time'+ i +'">'+ '작성일 : ' + data[i].timestamp + '</p>';
+
+
+    		      }
+    			  $('#dv').html(html)
+    		}
+    );
+  };
+</script>
+</body>
+</html>

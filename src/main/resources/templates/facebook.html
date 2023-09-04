@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Facebook</title>
+  <script  src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+</head>
+<body>
+<div id="dv"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '{appId}',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v17.0'
+    });
+
+    FB.api(
+            "https://graph.facebook.com/v17.0/{appId}/feed?fields=message%2Cpicture%2Clink%2Cname%2Ccaption%2Cdescription%2Csource&access_token={access_token}",
+    		'GET',
+    		{"fields":"message,picture,link,name,caption,description,source"},
+    		function(response) {
+    			console.log(response)
+    			  var data = response.data
+    		      var html = ""
+    		      for(var i=0; i<data.length; i++){
+    		    	  console.log(data[i])
+
+                      if (data[i].name && data[i].name.includes("김혜진")) {
+                        html += '<h1 id="name'+ i + '">' + data[i].name+'</h1>';
+                        html += '<img id="image' + i + '" src="' + data[i].picture + '" width="300" height="300">';
+                        html += '<hr / style="border : 0px; border-top: 5px solid #663399;">';
+                      }
+
+                      if (data[i].message && data[i].picture) {
+                        html += '<p>'+ ' 게시글 내용 : ' + data[i].message+'</p>';
+                        html += '<img id="image' + i + '" src="' + data[i].picture + '" width="300" height="300">';
+                        html += '<hr style="border: 0px; border-top: 5px solid #663399;">';
+                      }
+
+    		      }
+    			  $('#dv').html(html)
+    		}
+    );
+  };
+</script>
+</body>
+</html>
