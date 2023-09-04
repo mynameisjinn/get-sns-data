@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youtube</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+</head>
+<body>
+<!--<iframe-->
+<!--        id="ytplayer"-->
+<!--        type="text/html"-->
+<!--        width="720"-->
+<!--        height="405"-->
+<!--        src="https://www.youtube.com/embed/M7lc1UVf-VE"-->
+<!--        frameborder="0"-->
+<!--        allowfullscreen="allowfullscreen">-->
+<!--    -->
+<!--</iframe>-->
+</body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&channelId=UC6KwCU8Y8Uw4h_Q0ptLZkqw&type=video&key={token}",
+            contentType : "application/json",
+            success : function(data) {
+                console.log(data);
+                data.items.forEach(function(element, index) {
+<!--                console.log(data.items[index].snippet.title);-->
+                    $('body').append('<h1>'+ data.items[index].snippet.title +'</h1>');
+                    $('body').append('<p>'+ data.items[index].snippet.description +'</p>');
+                    $('body').append('<iframe width="560" height="315" src="https://www.youtube.com/embed/'+element.id.videoId+'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+                    $('body').append('<hr style="border: 0px; border-top: 5px solid #663399;">');
+                });
+            },
+            complete : function(data) {
+            },
+            error : function(xhr, status, error) {
+                console.log("유튜브 요청 에러: "+error);
+            }
+        });
+    });
+</script>

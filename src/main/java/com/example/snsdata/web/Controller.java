@@ -20,4 +20,9 @@ public class Controller {
     public String instagram(){
         return "instagram";
     }
+
+    @GetMapping("/youtube")
+    public String youtube(){
+        return "youtube";
+    }
 }
