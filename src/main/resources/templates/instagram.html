@@ -11,14 +11,14 @@
 <script>
   window.fbAsyncInit = function() {
     FB.init({
-      appId            : '{appId}',
+      appId            : '122099236334028554',
       autoLogAppEvents : true,
       xfbml            : true,
       version          : 'v17.0'
     });
 
     FB.api(
-            "https://graph.facebook.com/v17.0/{appId}/media?fields=id%2Cmedia_type%2Cmedia_url%2Cpermalink%2Cusername%2Ccaption%2Ctimestamp&access_token={access_token}",
+            "",
     		'GET',
     		{"fields":"id,media_type,media_url,permalink,username,caption,timestamp"},
     		function(response) {

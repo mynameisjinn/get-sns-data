@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+###  토큰 정보 ###
+TOKEN.md
+
